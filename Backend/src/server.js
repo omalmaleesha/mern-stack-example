@@ -3,15 +3,21 @@ import notesRoutes from "./routes/notesRoutes.js";
 import connectDB from "./config/db.js";
 import dotenv from "dotenv";
 import ratelimiter from "./middleware/rateLimiter.js";
+import cors from "cors"
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 5001
+
+app.use(cors({
+    origin: "http://localhost:5173",
+}));
 //middleware
 // is a function that we can run between the  middle of a req and a res
 app.use(express.json());
 app.use(ratelimiter);
+
 // app.use((req,res,next)=>{
 //     console.log(`The method of the request is ${req.method} & the URL is ${req.url}`);
 //     next();
