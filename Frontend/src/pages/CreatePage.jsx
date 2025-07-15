@@ -1,6 +1,8 @@
 import { ArrowLeftIcon } from 'lucide-react';
 import React, { useState } from 'react'
 import { Link }  from 'react-router'
+import {toast} from 'react-hot-toast'
+import api from '../lib/axios';
 
 export const CreatePage = () => {
   const [title,setTitle] = useState("");
@@ -10,8 +12,31 @@ export const CreatePage = () => {
   const handleSubmit = (e) =>{
     e.preventDefault();
     console.log(title+" : "+content)
+    if(!title.trim() || !content.trim()){
+      toast.error("Please fill all the fields");
+      return;
+    }
+    setLoading(true);
+    try {
+      api.post("/notes/create", {
+        title,
+        content
+      })
+      toast.success("Note created successfully");
+    } catch (error) {
+      console.log("error in creating note",error);
+      if(error.response.status === 429){
+        toast.error("Too many requests",{
+          duration:4000,
+          icon:"☠️"
+        });
+      }else{
+        toast.error("Failed to create note");
+      }
+    } finally{
+      setLoading(false);
+    }
   }
-
 
   return (
       <div className="min-h-screen bg-base-200">

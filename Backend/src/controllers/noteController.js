@@ -49,7 +49,7 @@ export const deleteNote = async (req,res) =>{
     try {
         const deletedNote = await Note.findByIdAndDelete(req.params.id)
         if(!deletedNote) return res.status(404).json({"massage":"Note not found"});
-        res.status(200).json(newNote);
+        res.status(200).json({"massage":"Note deleted successfully"});
     } catch (error) {
         console.error("Error in createNote" ,error);
         res.status(500).send("Server Error");

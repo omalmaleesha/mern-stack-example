@@ -1,0 +1,13 @@
+{
+  "name": "mern-stack",
+  "version": "1.0.0",
+  "description": "A full-stack notes application built with the MERN stack (MongoDB, Express.js, React, Node.js) featuring a modern UI with Tailwind CSS and DaisyUI, rate limiting, and real-time notifications.",
+  "main": "index.js",
+  "scripts": {
+    "build": "",
+    "start":""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
